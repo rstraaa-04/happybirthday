@@ -1,63 +1,106 @@
 body {
-    background-color: #add8e6; /* Warna latar belakang pink muda */
+    background-color: #f7eadc; /* Warna latar belakang krem */
     font-family: 'Georgia', serif;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    color: #4a4a4a;
     overflow: hidden;
-}
-
-.love-title {
-    font-family: 'Brush Script MT', cursive;
-    font-size: 3em;
-    color: #e91e63;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-}
-
-.book {
-    width: 600px;
-    height: 800px;
     position: relative;
-    perspective: 1500px;
+    color: #4a4a4a;
+}
+
+.background-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.bg-top, .bg-bottom, .butterfly, .flower {
+    position: absolute;
+    width: 100%;
+}
+
+.bg-top { top: 0; left: 0; }
+.bg-bottom { bottom: 0; left: 0; }
+.butterfly { top: 10%; left: 10%; width: 100px; }
+.flower { bottom: 5%; right: 10%; width: 80px; }
+
+.book-container {
+    position: relative;
+    width: 350px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .cover {
     width: 100%;
     height: 100%;
     position: absolute;
-    cursor: pointer;
-    background: linear-gradient(135deg, #f8bbd0, #ffc1e3); /* Gradasi warna sampul */
+    background-color: #f5f5dc; /* Warna sampul yang lembut */
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    z-index: 10;
     transition: transform 1s ease-in-out;
     transform-origin: left;
+    z-index: 10;
 }
 
-.cover-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 4em;
-    color: #fff;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+.photo-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    padding: 20px;
+    position: relative;
+    width: 90%;
+    height: 90%;
 }
 
-.cover-subtext {
+.cover-photo {
+    width: 100%;
+    height: auto;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: rotate(3deg);
+    transition: transform 0.3s ease;
+}
+
+.cover-2 { transform: rotate(-5deg); }
+.cover-3 { grid-column: 1 / 3; width: 80%; margin: auto; }
+
+.cover-title {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2em;
+    color: #e91e63;
+    margin-top: -30px;
+}
+
+.open-btn {
+    padding: 12px 30px;
     font-size: 1.2em;
+    font-family: 'Georgia', serif;
+    background-color: #a87e8e; /* Warna tombol cokelat muda */
     color: #fff;
-    margin-top: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin-top: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.cover.open {
-    transform: rotateY(-180deg);
+.open-btn:hover {
+    background-color: #8c6a76;
+    transform: translateY(-2px);
 }
 
 .page {
@@ -68,7 +111,7 @@ body {
     border: 1px solid #ccc;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-radius: 5px;
-    padding: 30px;
+    padding: 20px;
     box-sizing: border-box;
     transform-origin: left;
     transition: transform 1s ease-in-out;
@@ -79,26 +122,14 @@ body {
     align-items: center;
     text-align: center;
     backface-visibility: hidden;
+    opacity: 0; /* Awalnya tidak terlihat */
 }
 
-.page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2em;
-    color: #d81b60;
-    margin-bottom: 20px;
+/* KENDALI PENUH PENGGUNA: KELAS UNTUK MENGAKTIFKAN EFEK */
+.active .cover {
+    transform: rotateY(-180deg);
 }
 
-.page-image {
-    width: 80%;
-    max-height: 400px;
-    object-fit: contain;
-    border-radius: 8px;
-    border: 3px solid #f8bbd0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-p {
-    margin-top: 20px;
-    font-size: 1.1em;
-    line-height: 1.6;
+.active .page {
+    opacity: 1; /* Halaman terlihat saat aktif */
 }
