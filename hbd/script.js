@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const book = document.querySelector('.book');
     const cover = document.getElementById('cover');
     const pages = document.querySelectorAll('.page');
 
     cover.addEventListener('click', () => {
-        cover.classList.add('open');
+        // Menambahkan kelas 'active' ke elemen 'book'
+        book.classList.add('active');
 
-        let delay = 8000; // Jeda 1 detik setelah sampul terbuka
-
+        // Semua halaman akan berbalik secara instan
         pages.forEach((page, index) => {
-            setTimeout(() => {
-                page.style.transform = `rotateY(-180deg)`;
-                // Mengatur z-index agar halaman di belakang maju ke depan
-                page.style.zIndex = pages.length - index;
-            }, delay + (index * 8000)); // Halaman akan membalik dengan jeda 1 detik
+            page.style.transform = `rotateY(-180deg)`;
+            // Mengatur z-index agar halaman di belakang maju ke depan
+            // Ini tetap diperlukan agar halaman tampil dengan benar
+            page.style.zIndex = pages.length - index;
         });
     });
 });
