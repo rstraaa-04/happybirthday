@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const book = document.querySelector('.book');
+    const bookContainer = document.querySelector('.book-container');
+    const openButton = document.getElementById('open-button');
     const cover = document.getElementById('cover');
     const pages = document.querySelectorAll('.page');
 
-    cover.addEventListener('click', () => {
-        // Menambahkan kelas 'active' ke elemen 'book'
-        book.classList.add('active');
+    openButton.addEventListener('click', () => {
+        // Menambahkan kelas 'active' saat tombol diklik
+        bookContainer.classList.add('active');
+        openButton.style.display = 'none'; // Sembunyikan tombol 'Open'
 
-        // Semua halaman akan berbalik secara instan
+        // Memutar halaman secara instan saat dibuka
         pages.forEach((page, index) => {
             page.style.transform = `rotateY(-180deg)`;
-            // Mengatur z-index agar halaman di belakang maju ke depan
-            // Ini tetap diperlukan agar halaman tampil dengan benar
             page.style.zIndex = pages.length - index;
         });
     });
